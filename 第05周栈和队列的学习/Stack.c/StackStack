@@ -13,73 +13,73 @@
 typedef  int SElemType;
 typedef  int Status;
 
-//------------------------ Ë³ĞòÕ»------------------------------------
-typedef struct SqStack//Ë³ĞòÕ»µÄ½á¹¹
+//------------------------ é¡ºåºæ ˆ------------------------------------
+typedef struct SqStack//é¡ºåºæ ˆçš„ç»“æ„
 {
 	SElemType* base;
 	SElemType* top;
 	int StackSize;
 }SqStack;
 
-Status InitStack(SqStack* S)//³õÊ¼»¯Ë³ĞòÕ»
+Status InitStack(SqStack* S)//åˆå§‹åŒ–é¡ºåºæ ˆ
 {
 	S->base = (SElemType*)malloc(MAXSIZE * sizeof(SElemType));
-	if (!S->base)exit(OVERFLOW);//ÅĞ¶Á¿Õ¼äÊÇ·ñ³É¹¦¿ª±Ù
-	S->top = S->base;//´ËÊ±Îª¿ÕÕ»£»
-	return OK;//³õÊ¼»¯³É¹¦
+	if (!S->base)exit(OVERFLOW);//åˆ¤è¯»ç©ºé—´æ˜¯å¦æˆåŠŸå¼€è¾Ÿ
+	S->top = S->base;//æ­¤æ—¶ä¸ºç©ºæ ˆï¼›
+	return OK;//åˆå§‹åŒ–æˆåŠŸ
 };
 
-Status StackEmpty(SqStack S)//Ë³ĞòÕ»ÅĞ¶ÏÊÇ·ñÎª¿Õ
+Status StackEmpty(SqStack S)//é¡ºåºæ ˆåˆ¤æ–­æ˜¯å¦ä¸ºç©º
 {
-	if (S.top == S.base) //Õ»¿ÕµÄÌõ¼ş
+	if (S.top == S.base) //æ ˆç©ºçš„æ¡ä»¶
 		return TRUE;
 	else 
 		return FALSE;
 };
 
-int StackLength(SqStack S)//ÇóË³ĞòÕ»µÄ³¤¶È
+int StackLength(SqStack S)//æ±‚é¡ºåºæ ˆçš„é•¿åº¦
 {
 	return S.top - S.base;
 };
 
-//Çå¿ÕË³ĞòÕ»
+//æ¸…ç©ºé¡ºåºæ ˆ
 Status ClearStack(SqStack* S)
 {
 	if(S->base)
-	  S->top = S->base;//ÈÃÕ»¶¥Ö¸ÕëÖ¸ÏòÕ»µ×£¬´ËÊ±Âú×ã¿ÕÕ»µÄÌõ¼ş
-	return OK;//²Ù×÷³É¹¦
+	  S->top = S->base;//è®©æ ˆé¡¶æŒ‡é’ˆæŒ‡å‘æ ˆåº•ï¼Œæ­¤æ—¶æ»¡è¶³ç©ºæ ˆçš„æ¡ä»¶
+	return OK;//æ“ä½œæˆåŠŸ
 }
 
-//Ïú»ÙË³ĞòÕ»
+//é”€æ¯é¡ºåºæ ˆ
 Status DestroyStack(SqStack *S)
 {
 	if (!S->base)
 	{
-		free(S->base);//ÊÍ·Å¿Õ¼ä
-		S->base = NULL;//ÖÃ¿ÕÖ¸Õë£¬·ÀÖ¹±ä³ÉÒ°Ö¸Õë
+		free(S->base);//é‡Šæ”¾ç©ºé—´
+		S->base = NULL;//ç½®ç©ºæŒ‡é’ˆï¼Œé˜²æ­¢å˜æˆé‡æŒ‡é’ˆ
 		S->top = NULL;
 		S->StackSize = 0;
 	}
 	return OK;
 };
 
-//Ë³ĞòÕ»µÄÈëÕ»
-//1.ÅĞ¶ÏÕ»ÊÇ·ñÂú
-//2.¸³Öµ
-//3.topÖ¸ÕëºóÒÆ
+//é¡ºåºæ ˆçš„å…¥æ ˆ
+//1.åˆ¤æ–­æ ˆæ˜¯å¦æ»¡
+//2.èµ‹å€¼
+//3.topæŒ‡é’ˆåç§»
 Status Push(SqStack *S,SElemType e)
 {
 	if ((S->top - S->base) == S->StackSize)
-		return ERROR;//ÅĞ¶ÏÊÇ·ñÕ»Âú
+		return ERROR;//åˆ¤æ–­æ˜¯å¦æ ˆæ»¡
 	*S->top = e;
 	S->top++;//*(S->top)++=e;
 	return OK;
 };
 
-//Ë³ĞòÕ»µÄ³öÕ»
-//1.ÅĞ¶ÏÊÇ·ñÎª¿Õ
-//2.topÖ¸ÕëÏÂÒÆ
-//3.È¡Öµ
+//é¡ºåºæ ˆçš„å‡ºæ ˆ
+//1.åˆ¤æ–­æ˜¯å¦ä¸ºç©º
+//2.topæŒ‡é’ˆä¸‹ç§»
+//3.å–å€¼
 Status Pop(SqStack* S, SElemType* e)
 {
 	if (S->base == S->top)
@@ -89,23 +89,23 @@ Status Pop(SqStack* S, SElemType* e)
 	return OK;
 };
 
-//-----------------------------------Á´Õ»--------------------------------------------
-//¶¨ÒåÁ´Õ»½á¹¹£¬ÔËËãÊÜÏŞµÄµ¥Á´±í
+//-----------------------------------é“¾æ ˆ--------------------------------------------
+//å®šä¹‰é“¾æ ˆç»“æ„ï¼Œè¿ç®—å—é™çš„å•é“¾è¡¨
 typedef struct StackNode
 {
 	SElemType data;
 	struct StackNode* next;
 }StackNode,*LinkStack;
-//×¢Òâ£ºÁ´Õ»ÖĞÖ¸ÕëµÄ·½ÏòÎªÕ»¶¥Ö¸ÏòÕ»µ×£¬±íÎ²ÎªÕ»¶¥£¬±íÍ·ÎªÕ»µ×
+//æ³¨æ„ï¼šé“¾æ ˆä¸­æŒ‡é’ˆçš„æ–¹å‘ä¸ºæ ˆé¡¶æŒ‡å‘æ ˆåº•ï¼Œè¡¨å°¾ä¸ºæ ˆé¡¶ï¼Œè¡¨å¤´ä¸ºæ ˆåº•
 
-//³õÊ¼»¯Á´Õ»
-Status InitStack_Link(LinkStack* S)//¶ş¼¶Ö¸Õë£¬Ö¸ÏòÁ´Õ»µÄÍ·Ö¸Õë
+//åˆå§‹åŒ–é“¾æ ˆ
+Status InitStack_Link(LinkStack* S)//äºŒçº§æŒ‡é’ˆï¼ŒæŒ‡å‘é“¾æ ˆçš„å¤´æŒ‡é’ˆ
 {
-	*S = NULL;//ĞŞ¸ÄÍ·Ö¸ÕëÖ¸Ïò
+	*S = NULL;//ä¿®æ”¹å¤´æŒ‡é’ˆæŒ‡å‘
 	return OK;
 };
 
-//ÅĞ¶ÏÁ´Õ»ÊÇ·ñÎª¿Õ
+//åˆ¤æ–­é“¾æ ˆæ˜¯å¦ä¸ºç©º
 Status StackEmpty_Link(LinkStack S)
 {
 	if (S == NULL)
@@ -114,7 +114,7 @@ Status StackEmpty_Link(LinkStack S)
 		return FALSE;
 }
 
-//Á´Õ»µÄÈëÕ»
+//é“¾æ ˆçš„å…¥æ ˆ
 Status Push_Link(LinkStack* S, SElemType e)
 {
 	StackNode* p = (StackNode*)malloc(sizeof(StackNode));
@@ -125,25 +125,25 @@ Status Push_Link(LinkStack* S, SElemType e)
 	return OK;
 };
 
-//Á´Õ»µÄ³öÕ»
+//é“¾æ ˆçš„å‡ºæ ˆ
 Status Pop_Link(LinkStack* S, SElemType* e)
 {
 	if (*S==NULL)
 		return ERROR;
 	*e = (*S)->data;
-	StackNode* p = *S;//±£´æµ±Ç°½áµã£¬×¼±¸ÊÍ·Å
+	StackNode* p = *S;//ä¿å­˜å½“å‰ç»“ç‚¹ï¼Œå‡†å¤‡é‡Šæ”¾
 	(*S) = (*S)->next;
-	free(p);//É¾³ı½áµã£¬·ÀÖ¹ÄÚ´æĞ¹Â©
+	free(p);//åˆ é™¤ç»“ç‚¹ï¼Œé˜²æ­¢å†…å­˜æ³„æ¼
 	return OK;
 };
 
-//È¡Õ»¶¥ÔªËØ
+//å–æ ˆé¡¶å…ƒç´ 
 SElemType GetTop(LinkStack S)
 {
 	if(!S)
 	return S->data;
 };
-//SÖ¸ÕëÖ¸ÏòÕ»¶¥ÔªËØ
+//SæŒ‡é’ˆæŒ‡å‘æ ˆé¡¶å…ƒç´ 
 
 
 int main()
